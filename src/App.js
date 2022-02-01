@@ -33,9 +33,11 @@ export default function App() {
     const [dieList, setDieList] = React.useState(initDiceValues())
 
     const dieElements = dieList.map((die) => <Die value={die.value} key={die.id} id={die.id} isHeld={die.isHeld} holdDie={holdDie}/>);
-    console.log(dieList)
+    //console.log(dieList)
     return (
         <main>
+            <h1> Tenzies </h1>
+            <p> Roll until all the dice are the same. Click each die to freeze it at its current value between rolls</p>
             <div className="dice">
                 {dieElements}
             </div>
