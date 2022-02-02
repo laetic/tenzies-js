@@ -7,15 +7,18 @@ import Grid from "./Grid"
 
 export default function App() {
 
-    const square = {letter: 'B', color:'white'}
-    const row = {squares: [], letters: 'aaaaaa', squareNum: 5, player:false}
-    const grid = []
+    const square = {letter: '', color:'white'}
+    const row = {squares: [], letters: '', squareNum: 5, player:false};
+    const rowLetters = ['cdcdcdcd','cdcdcdcd','cdcdcdcd','cdcdcdcd','cdcdcdcd','cdcdcdcd']
+    const grid = {rows: [], rowLetters: rowLetters}
+
+
     for(let i = 0; i < row.squareNum; i++) {
         row.squares.push(square);
     }
 
     for (let i = 0; i < 6; i++) {
-        grid.push(row);
+        grid.rows.push(row);
     }
 
     return (

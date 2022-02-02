@@ -11,10 +11,10 @@ function Square(props) {
 }
 
 function Row(props) {
-        
     const squareElements = []
     for (let i = 0; i < props.row.squareNum; i++) {
-        squareElements.push(<Square square={props.row.squares[i]} key={nanoid()}/>)
+        let square = {...props.row.squares[i], letter: props.row.letters[i]}
+        squareElements.push(<Square square={square} key={nanoid()}/>)
     }
 
     return (
@@ -27,8 +27,9 @@ function Row(props) {
 export default function Grid(props) {
     const rowElements = []
     // console.log(props)
-    for (let i = 0; i < props.grid.length; i++) {
-        rowElements.push(<Row row={props.grid[i]} key={nanoid()}/>)
+    for (let i = 0; i < props.grid.rows.length; i++) {
+        let row = {...props.grid.rows[i], letters: props.grid.rowLetters[i]}
+        rowElements.push(<Row row={row} key={nanoid()}/>)
     }
 
     return (

@@ -38,7 +38,7 @@ main {
     display:flex;
     flex-direction: column;
     background: rgb(238, 238, 238);
-    padding-block:20px;
+    padding-block:10px;
     border-radius: 20px;
 }
 
@@ -83,7 +83,7 @@ main {
     margin-bottom:60px; */
 
     margin:0 0;
-    margin-block: 50px;
+    margin-block: 20px;
     border-radius: 10px;
     border-style:none;
     font-weight:300;
