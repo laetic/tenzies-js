@@ -2,6 +2,7 @@ import React from "react"
 import Die from './Die'
 import {nanoid} from 'nanoid'
 import Confetti from "react-confetti"
+import Keyboard from "./Keyboard"
 
 export default function App() {
     function randomIntArray(min, max, length) {
@@ -52,8 +53,7 @@ export default function App() {
             <div className="dice">
                 {dieElements}
             </div>
-            <button className="roll" onClick={() => setDieList(newDiceValues)}> {tenzies ? "New Game" : "Roll"} </button>
-            {tenzies && <Confetti />}
+            <Keyboard />
         </main>
     )
 }
