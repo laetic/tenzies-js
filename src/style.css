@@ -34,29 +34,24 @@ main {
     padding:20px;
 }
 
-.dice {
-    display:grid;
-    /* grid-area:auto; */
-    grid-template-columns: repeat(5, 1fr);
-    justify-items:center;
-    margin-top: auto;
-    margin-bottom:60px;
-    gap: 20px;
-}
-
-.die {
+.grid {
     display:flex;
-    align-items: center;
-
-    justify-content:center;
-    margin: auto;
-    border-radius: 10px;
-    box-shadow: 0px 5px 5px 0px #dbdddf;
-    border-style:none;
+    flex-direction: column;
 }
 
-.die--held {
-    background-color: #53e25f;
+.grid--row {
+    display:flex;
+    margin-block:10px;
+    justify-content: center;
+}
+
+.grid--square {
+    margin-inline:10px;
+    display:flex;
+    width: 50px;
+    height: 50px;
+    background: chartreuse;
+    color:black;
 }
 
 .keyboard {
