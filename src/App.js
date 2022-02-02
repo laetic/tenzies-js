@@ -12,7 +12,7 @@ export default function App() {
     function initRows () {
         const rows = []
         for (let i = 0; i < 6; i++) {
-            rows.push({squares: initSquares(), letters: 'abab', squareNum: 5, player:false});
+            rows.push({squares: initSquares(), letters: '', squareNum: 5, player:false});
             if(i == 0) 
                 rows[i].player = true;
         }

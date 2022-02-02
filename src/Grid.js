@@ -5,7 +5,7 @@ import {nanoid} from 'nanoid'
 function Square(props) {
     return (
         <div className="grid--square">
-            <h1>{props.square.letter}</h1>
+            <h1>{props.square.letter.toUpperCase()}</h1>
         </div>
     )
 }
