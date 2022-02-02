@@ -1,7 +1,7 @@
 import React from "react"
 import Die from './Die'
 import {nanoid} from 'nanoid'
-
+import Confetti from "react-confetti"
 
 export default function App() {
     function randomIntArray(min, max, length) {
@@ -18,6 +18,9 @@ export default function App() {
     }
 
     function newDiceValues() {
+        if(tenzies) {
+            dieList.forEach((die) => die.isHeld = false)
+        }
         return (dieList.map((die) => 
             die.isHeld ? 
                 die : 
@@ -30,10 +33,18 @@ export default function App() {
         })
     }
 
+    const [tenzies, setTenzies] = React.useState(false)
     const [dieList, setDieList] = React.useState(initDiceValues())
-
     const dieElements = dieList.map((die) => <Die value={die.value} key={die.id} id={die.id} isHeld={die.isHeld} holdDie={holdDie}/>);
     //console.log(dieList)
+
+    React.useEffect(() => {
+        const val = dieList[0].value;
+        const allHeld = dieList.every((die) => die.isHeld)
+        const allVal = dieList.every((die) => die.value === val)
+        setTenzies(allHeld && allVal)
+    }, [dieList])
+
     return (
         <main>
             <h1> Tenzies </h1>
@@ -41,7 +52,8 @@ export default function App() {
             <div className="dice">
                 {dieElements}
             </div>
-            <button className="roll" onClick={() => setDieList(newDiceValues)}> Roll </button>
+            <button className="roll" onClick={() => setDieList(newDiceValues)}> {tenzies ? "New Game" : "Roll"} </button>
+            {tenzies && <Confetti />}
         </main>
     )
 }
