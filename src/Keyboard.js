@@ -5,11 +5,16 @@ import {nanoid} from 'nanoid'
 function Key (props) {
     const backspace = props.char === "!";
     const submit = props.char ==="@";
-    const styles = backspace || submit ? "material-icons" : "";
+    const useIcon = backspace || submit ? "material-icons" : "";
+    const callback = backspace ? 
+        () => props.removeLetter() : 
+        submit ? 
+        () => props.submit() :
+        () => props.addLetter(props.char)
 
     return (
-        <button className={`keyboard--key ${styles}`} onClick={() => props.addLetter(props.char)}>
-            <h4 className = {styles}>
+        <button className="keyboard--key" onClick={callback}>
+            <h4 className = {useIcon}>
                 {backspace ? "arrow_back" : 
                 submit ? "check" :
                     props.char}
@@ -21,7 +26,13 @@ function Key (props) {
 function KeyboardRow (props) {
     return (
         <div className="keyboard--row">
-            {[...props.letters].map((letter) => <Key char={letter} key={nanoid()} addLetter={props.addLetter}/>)}
+            {[...props.letters].map((letter) => 
+            <Key 
+            char={letter} 
+            key={nanoid()} 
+            addLetter={props.addLetter} 
+            removeLetter={props.removeLetter} 
+            submit={props.submit} />)}
         </div>
     )
 }
@@ -31,7 +42,13 @@ export default function Keyboard (props) {
     //console.log(props)
     return (
         <div className="keyboard">
-            {[...letterRows].map((row) => <KeyboardRow letters={row} key={nanoid()} addLetter={props.addLetter}/>)}
+            {[...letterRows].map((row) => 
+            <KeyboardRow 
+            letters={row} 
+            key={nanoid()} 
+            addLetter={props.addLetter} 
+            removeLetter={props.removeLetter} 
+            submit={props.submit}/>)}
         </div>
     )
     }

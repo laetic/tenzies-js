@@ -31,13 +31,27 @@ export default function App() {
     function addLetter(letter) {
         setRows( (prevRows) => {
             const pushRow = prevRows.filter( (row) => row.player)[0]
-            pushRow.letters = pushRow.letters.concat(letter)
+            if (pushRow.letters.length < 5)
+                pushRow.letters = pushRow.letters.concat(letter);
             return prevRows.map( (row) => row.player ? pushRow : row);
         })
     }
 
     function removeLetter(letter) {
+        setRows( (prevRows) => {
+            const pushRow = prevRows.filter( (row) => row.player)[0]
+            pushRow.letters = pushRow.letters.slice(0,-1);
+            return prevRows.map( (row) => row.player ? pushRow : row);
+        })
+    }
 
+    function submit() {
+        console.log("in submit func")
+        // setRows( (prevRows) => {
+        //     const pushRow = prevRows.filter( (row) => row.player)[0]
+        //     pushRow.letters = pushRow.letters.slice(0,-1);
+        //     return prevRows.map( (row) => row.player ? pushRow : row);
+        // })
     }
 
 
@@ -49,7 +63,7 @@ export default function App() {
             <div className="grid">
                 {<Grid rows={rows}/>}
             </div>
-            <Keyboard addLetter={addLetter}/>
+            <Keyboard addLetter={addLetter} removeLetter={removeLetter} submit={submit}/>
         </main>
     )
 }
