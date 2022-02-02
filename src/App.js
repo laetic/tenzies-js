@@ -7,7 +7,7 @@ import Grid from "./Grid"
 
 export default function App() {
 
-    const square = {letter: 'b', color:'white'}
+    const square = {letter: 'B', color:'white'}
     const row = {squares: [], letters: 'aaaaaa', squareNum: 5, player:false}
     const grid = []
     for(let i = 0; i < row.squareNum; i++) {

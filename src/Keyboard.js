@@ -7,7 +7,7 @@ export default function Keyboard () {
     function Key (props) {
         return (
             <button className="keyboard--key">
-                a
+                {props.char}
             </button>
         )
     }
