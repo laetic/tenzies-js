@@ -5,7 +5,7 @@ import Confetti from "react-confetti"
 import Keyboard from "./Keyboard"
 import Grid from "./Grid"
 import { fireEvent } from "@testing-library/react"
-import raw from './dictionary.txt'
+import dict from './dictionary'
 
 
 export default function App() {
@@ -45,21 +45,6 @@ export default function App() {
         }
         return squares;
     }
-        
-    function getDictionary() {
-        let result = ['test']
-        fetch(raw)
-            .then(response => response.text())
-            .then(text => {
-                console.log(text.split(/\n/))
-                result = [...text.split(/\n/)]
-                return [...text.split(/\n/)]
-            })
-        console.log('after fetch')
-        console.log(result)
-        return result
-            // outputs the content of the text file
-    }
 
     function addLetter(letter) {
         setRows( (prevRows) => {
@@ -80,11 +65,7 @@ export default function App() {
 
     function submit() {
         const playerRow = rows[playerIndex]
-        // const colors = [...word].map((letter, index) => 
-        //     letter === playerRow.letters[index] ? "green" : 
-        //     [...playerRow.letters].some( (playerLetter) => playerLetter === letter) ? "yellow" : 
-        //     "white"
-        //     )
+
         let colors = []
         if (playerRow.letters.length != 5 || !(inDictionary(playerRow.letters))) {
             colors = playerRow.squares.map(() => "red")
@@ -100,10 +81,9 @@ export default function App() {
         setStyles(colors)
     }
 
-    function inDictionary(word) {
+    function inDictionary(lookup) {
         console.log("in dictionary")
-        //console.log(dictionary)
-        return true;
+        return dict.some((word) => word === lookup);
     }
 
     function nextRow() {
