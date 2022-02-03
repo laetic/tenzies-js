@@ -6,8 +6,21 @@ import Keyboard from "./Keyboard"
 import Grid from "./Grid"
 import { fireEvent } from "@testing-library/react"
 
+
 export default function App() {
     const [rows, setRows] = React.useState (initRows) ;
+    const dictionary = getDictionary();
+    const word = "fjord"
+    const [styles, setStyles] = React.useState (["green","yellow","white","white","white" ])
+
+    React.useEffect( () => {
+        setRows( (prevRows) => {
+            const playerRow = prevRows.filter( (row) => row.player)[0]
+            playerRow.squares = playerRow.squares.map((item, index) => ({...item, color: styles[index]}))
+            return prevRows.map( (row) => row.player ? playerRow : row);
+        })
+        console.log(rows)
+    }, [styles])
 
     function initRows () {
         const rows = []
@@ -27,6 +40,13 @@ export default function App() {
         return squares;
     }
         
+    function getDictionary() {
+        fetch('/dictionary.txt')
+        .then((r) => r.text())
+        .then(text  => {
+          return text
+        })  
+    }
 
     function addLetter(letter) {
         setRows( (prevRows) => {
@@ -46,12 +66,11 @@ export default function App() {
     }
 
     function submit() {
-        console.log("in submit func")
-        // setRows( (prevRows) => {
-        //     const pushRow = prevRows.filter( (row) => row.player)[0]
-        //     pushRow.letters = pushRow.letters.slice(0,-1);
-        //     return prevRows.map( (row) => row.player ? pushRow : row);
-        // })
+        setRows( (prevRows) => {
+            const pushRow = prevRows.filter( (row) => row.player)[0]
+            pushRow.letters = pushRow.letters.slice(0,-1);
+            return prevRows.map( (row) => row.player ? pushRow : row);
+        })
     }
 
 

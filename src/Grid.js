@@ -3,8 +3,18 @@ import {nanoid} from 'nanoid'
 
 
 function Square(props) {
+    
+    const styles = {
+        backgroundColor: props.square.color == "green" ? 
+        "#7ef47c" : 
+        props.square.color == "yellow" ? 
+        "#f7f580" : 
+        "white"
+    }
+    console.log(styles)
     return (
-        <div className="grid--square">
+        
+        <div className="grid--square" style={styles}>
             <h1>{props.square.letter.toUpperCase()}</h1>
         </div>
     )
