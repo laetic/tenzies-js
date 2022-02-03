@@ -3,10 +3,10 @@
 ## Changing the tenzies project into wordle
 
 ### Winning and Losing
-- [ ] If all the letters are correct (green) the game is won
-- [ ] If you win the game a screen says you won and a new game can be started. 
+- [x] If all the letters are correct (green) the game is won
+- [x] If you win the game a screen says you won and a new game can be started. 
 - [ ] If you fill all the rows without guessing the word the game is lost
-- [ ] A new game can be started if you lose the game. 
+- [x] A new game can be started if you lose the game. 
 
 ### Changes to Die 
 - [x] Die class should be a letter input instead
