@@ -14,13 +14,13 @@ export default function App() {
     const [styles, setStyles] = React.useState (["white","white","white","white","white" ])
     const [playerIndex, setPlayerRow] = React.useState(0);
     const [validSubmit, setValidSubmit] = React.useState(false);
-    const [wordle, setWordle] = React.useState(true);
+    const [wordle, setWordle] = React.useState(false);
 
     React.useEffect( () => {
         //console.log(rows)
         setRows( (prevRows) => {
             const playerRow = prevRows[playerIndex]
-            //console.log(playerRow)
+            console.log(playerRow)
             playerRow.squares = playerRow.squares.map((item, index) => ({...item, color: styles[index]}))
             return prevRows.map( (row) => row.player ? playerRow : row);
         })
@@ -50,6 +50,8 @@ export default function App() {
     }
 
     function addLetter(letter) {
+        if(wordle) return;
+
         setRows( (prevRows) => {
             const pushRow = rows[playerIndex]
             if (pushRow.letters.length < 5)
@@ -58,7 +60,9 @@ export default function App() {
         })
     }
 
-    function removeLetter(letter) {
+    function removeLetter() {
+        if (wordle) return;
+
         setRows( (prevRows) => {
             const pushRow = rows[playerIndex]
             pushRow.letters = pushRow.letters.slice(0,-1);
@@ -84,6 +88,10 @@ export default function App() {
         setStyles(colors)
     }
 
+    function resetGame() {
+        setWordle(false);
+    }
+
     function inDictionary(lookup) {
         //console.log("in dictionary")
         return dictionary.some((word) => word === lookup);
@@ -91,14 +99,15 @@ export default function App() {
 
     function nextRow() {
         setPlayerRow(playerIndex + 1);
+        setRows(initRows)
     }
 
     return (
         <main>
             <h1> Wordle </h1>
-            {wordle && <div>
+            {wordle && <div className="reset">
                     {wordle ? <p>Wordle!</p> : <p> Try again </p>}
-                    <button > Retry </button>
+                    <button className="reset--button" onClick={resetGame}> Retry </button>
                 </div>
             }
             {!wordle && 
