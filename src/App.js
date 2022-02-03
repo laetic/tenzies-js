@@ -5,7 +5,7 @@ import Confetti from "react-confetti"
 import Keyboard from "./Keyboard"
 import Grid from "./Grid"
 import { fireEvent } from "@testing-library/react"
-import dict from './dictionary'
+import dictionary from './dictionary'
 
 
 export default function App() {
@@ -14,13 +14,13 @@ export default function App() {
     const [styles, setStyles] = React.useState (["white","white","white","white","white" ])
     const [playerIndex, setPlayerRow] = React.useState(0);
     const [validSubmit, setValidSubmit] = React.useState(false);
-    //const dictionary = getDictionary();
+    const [wordle, setWordle] = React.useState(true);
 
     React.useEffect( () => {
-        console.log(rows)
+        //console.log(rows)
         setRows( (prevRows) => {
             const playerRow = prevRows[playerIndex]
-            console.log(playerRow)
+            //console.log(playerRow)
             playerRow.squares = playerRow.squares.map((item, index) => ({...item, color: styles[index]}))
             return prevRows.map( (row) => row.player ? playerRow : row);
         })
@@ -28,12 +28,15 @@ export default function App() {
             nextRow();
     }, [styles])
 
+    React.useEffect( () => {
+        if(rows[playerIndex].letters == word)
+            setWordle(true);
+    }, [validSubmit])
+
     function initRows () {
         const rows = []
         for (let i = 0; i < 6; i++) {
             rows.push({squares: initSquares(), letters: '', squareNum: 5});
-            // if(i == 0) 
-            //     rows[i].player = true;
         }
         return rows;
     }
@@ -82,36 +85,24 @@ export default function App() {
     }
 
     function inDictionary(lookup) {
-        console.log("in dictionary")
-        return dict.some((word) => word === lookup);
+        //console.log("in dictionary")
+        return dictionary.some((word) => word === lookup);
     }
 
     function nextRow() {
         setPlayerRow(playerIndex + 1);
-        // setRows( (prevRows) => {
-        //     console.log(prevRows)
-        //     //const prevRows = prevRows;
-        //     if (prevRows.every((row) => !row.player)) {
-        //         prevRows[0].player = true;
-        //         return prevRows;
-        //     }
-
-        //     for( let i = prevRows.length - 1; i >= 0 ; i--) {
-        //         if (prevRows[i].player) {
-        //             prevRows[i + 1].player = true;
-        //             prevRows[i].player = false;
-        //         }
-        //     }
-        //     return prevRows;
-        // })
     }
 
-
-    //console.log(rows)
     return (
         <main>
             <h1> Wordle </h1>
-            <p> Guess the 5 letter word. Only english words can be submitted. Letters in the right spot are green. Letters in the word are yellow.</p>
+            {wordle && <div>
+                    {wordle ? <p>Wordle!</p> : <p> Try again </p>}
+                    <button > Retry </button>
+                </div>
+            }
+            {!wordle && 
+            <p> Guess the 5 letter word. Only english words can be submitted. Letters in the right spot are green. Letters in the word are yellow.</p>}
             <div className="grid">
                 {<Grid rows={rows}/>}
             </div>
