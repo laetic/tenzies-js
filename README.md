@@ -4,7 +4,9 @@
 
 ### Winning and Losing
 - [ ] If all the letters are correct (green) the game is won
-- [ ] If you fill all the rows without guessing the word the game is list
+- [ ] If you win the game a screen says you won and a new game can be started. 
+- [ ] If you fill all the rows without guessing the word the game is lost
+- [ ] A new game can be started if you lose the game. 
 
 ### Changes to Die 
 - [x] Die class should be a letter input instead
@@ -15,8 +17,8 @@
 - [x] - Each row is a row object with 5 square objects {squares: [], letters, player}
 - [x] - Row gives each square object a character prop (could be empty) from letters
 - [x] - Row has a player flag which takes player input from Keyboard.
-- [ ] - When a player submits a word and does not win the player flag goes to the next row. 
-- [ ] Your previously submitted words each fill up one row
+- [x] - When a player submits a word and does not win the player flag goes to the next row. 
+- [x] Your previously submitted words each fill up one row
 
 ### Changes to input
 - [x] No need for a roll button
@@ -25,7 +27,10 @@
 - [x] The keyboard has a back button 
 - [x] The back button removes letters from your guess
 - [x] The keyboard has an enter button
-- [ ] The enter button submits your guess
+- [x] The enter button submits your guess
 - [ ] Words submitted must be in the english dictionary
-- [ ] The style of the keyboard changes which matches the letter style 
-- [ ] Each time a word is submitted letters that are in the correct spot are green and letters in the word are yellow
+- [ ] Words that are not in the dictionary will show up as red and cannot be submitted
+- [ ] The style of the keyboard changes which matches the letter style, or grey if the letter was guessed but not in the word.
+- [x] Each time a word is submitted letters that are in the correct spot are green and letters in the word are yellow
+- [ ] For words with multiple of the same letter, yellow and green letters matches the number of letters in the word.
+        ex.  STALE, guessed TRAIL, 1 yellow L. guessed ALELE,  1 green L. Should not be 1 yellow 1 green L. 

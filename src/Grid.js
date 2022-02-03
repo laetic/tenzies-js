@@ -11,7 +11,7 @@ function Square(props) {
         "#f7f580" : 
         "white"
     }
-    console.log(styles)
+    //console.log(styles)
     return (
         
         <div className="grid--square" style={styles}>
@@ -23,7 +23,7 @@ function Square(props) {
 function Row(props) {
     const squareElements = []
     for (let i = 0; i < props.row.squareNum; i++) {
-        //onsole.log(props)
+        //console.log(props)
         const letter = props.row.letters[i] ? props.row.letters[i] : ''
         let square = {...props.row.squares[i], letter: letter}
         squareElements.push(<Square square={square} key={nanoid()}/>)
@@ -38,7 +38,8 @@ function Row(props) {
 
 export default function Grid(props) {
     const rowElements = []
-    
+    //console.log("in grid")
+    //console.log(props)
     for (let i = 0; i < props.rows.length; i++) {
         
         let row = {...props.rows[i], letters: props.rows[i].letters}
