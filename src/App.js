@@ -9,12 +9,13 @@ import dictionary from './dictionary'
 
 
 export default function App() {
-    const [rows, setRows] = React.useState (initRows) ;
+    const [rows, setRows] = React.useState (() => initRows()) ;
     const word = "fjord"
-    const [styles, setStyles] = React.useState (["white","white","white","white","white" ])
-    const [playerIndex, setPlayerRow] = React.useState(0);
-    const [validSubmit, setValidSubmit] = React.useState(false);
-    const [wordle, setWordle] = React.useState(false);
+    const [styles, setStyles] = React.useState (() => ["white","white","white","white","white" ])
+    const [playerIndex, setPlayerRow] = React.useState(() => 0);
+    const [validSubmit, setValidSubmit] = React.useState(() => false);
+    const [wordle, setWordle] = React.useState(() => false);
+    const [endOfGame, setEndOfGame] = React.useState(() => false);
 
     React.useEffect( () => {
         //console.log(rows)
@@ -24,13 +25,18 @@ export default function App() {
             playerRow.squares = playerRow.squares.map((item, index) => ({...item, color: styles[index]}))
             return prevRows.map( (row) => row.player ? playerRow : row);
         })
-        if (validSubmit)
+        if (validSubmit) {
             nextRow();
+            setValidSubmit(false);
+        }
     }, [styles])
 
     React.useEffect( () => {
-        if(rows[playerIndex].letters == word)
+        //console.log("in wordle check")
+        if(rows[playerIndex].letters == word) {
             setWordle(true);
+            setEndOfGame(true);
+        }
     }, [validSubmit])
 
     function initRows () {
@@ -81,7 +87,7 @@ export default function App() {
             colors = [...playerRow.letters].map((playerLetter, index) => 
                 playerLetter === word[index] ? "green" : 
                 [...word].some( (wordLetter) => wordLetter === playerLetter) ? "yellow" : 
-                "white"
+                "grey"
                 )
             setValidSubmit(true);
         }
@@ -90,6 +96,9 @@ export default function App() {
 
     function resetGame() {
         setWordle(false);
+        setRows(initRows)
+        setPlayerRow(0);
+        setEndOfGame(false);
     }
 
     function inDictionary(lookup) {
@@ -99,19 +108,19 @@ export default function App() {
 
     function nextRow() {
         setPlayerRow(playerIndex + 1);
-        setRows(initRows)
     }
 
     return (
         <main>
             <h1> Wordle </h1>
-            {wordle && <div className="reset">
-                    {wordle ? <p>Wordle!</p> : <p> Try again </p>}
+            {endOfGame && 
+                <div className="reset">
+                    {wordle ? <p>Wordle!<Confetti /></p> : <p> Try again </p>}
                     <button className="reset--button" onClick={resetGame}> Retry </button>
                 </div>
             }
             {!wordle && 
-            <p> Guess the 5 letter word. Only english words can be submitted. Letters in the right spot are green. Letters in the word are yellow.</p>}
+            <p> Guess the 5 letter word. Only english words can be guessed. Letters in the right spot are green. Letters in the word are yellow.</p>}
             <div className="grid">
                 {<Grid rows={rows}/>}
             </div>
