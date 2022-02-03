@@ -3,13 +3,19 @@ import {nanoid} from 'nanoid'
 
 
 function Square(props) {
-    
+    const {color} = props.square;
+    let finalColor = "";
+    if (color == "green") {
+        finalColor = "#7ef47c"
+    } else if (color =="yellow") {
+        finalColor = "#f7f580"
+    } else if (color =="red") {
+        finalColor = "#f78082"
+    } else {
+        finalColor = "white"
+    }
     const styles = {
-        backgroundColor: props.square.color == "green" ? 
-        "#7ef47c" : 
-        props.square.color == "yellow" ? 
-        "#f7f580" : 
-        "white"
+        backgroundColor: finalColor
     }
     //console.log(styles)
     return (
