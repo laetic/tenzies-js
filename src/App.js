@@ -12,7 +12,7 @@ export default function App() {
     const [rows, setRows] = React.useState (() => initRows()) ;
     const word = "fjord"
     const [styles, setStyles] = React.useState (() => ["white","white","white","white","white" ])
-    const [playerIndex, setPlayerRow] = React.useState(() => 0);
+    const [playerIndex, setPlayerIndex] = React.useState(() => 4);
     const [validSubmit, setValidSubmit] = React.useState(() => false);
     const [wordle, setWordle] = React.useState(() => false);
     const [endOfGame, setEndOfGame] = React.useState(() => false);
@@ -28,15 +28,26 @@ export default function App() {
         if (validSubmit) {
             nextRow();
             setValidSubmit(false);
+            console.log("in submit" + playerIndex)
+            if(playerIndex === rows.length) {
+                console.log("in valid submit" + playerIndex)
+                setEndOfGame(true);
+            }
         }
     }, [styles])
 
     React.useEffect( () => {
-        //console.log("in wordle check")
+        console.log("in wordle check " + playerIndex)
+        if(playerIndex === rows.length - 1 && validSubmit) {
+            console.log("in last row")
+            setEndOfGame(true);
+        }
+
         if(rows[playerIndex].letters == word) {
             setWordle(true);
             setEndOfGame(true);
         }
+
     }, [validSubmit])
 
     function initRows () {
@@ -97,7 +108,7 @@ export default function App() {
     function resetGame() {
         setWordle(false);
         setRows(initRows)
-        setPlayerRow(0);
+        setPlayerIndex(0);
         setEndOfGame(false);
     }
 
@@ -107,7 +118,8 @@ export default function App() {
     }
 
     function nextRow() {
-        setPlayerRow(playerIndex + 1);
+        if(playerIndex < rows.length - 1)
+            setPlayerIndex(playerIndex + 1);
     }
 
     return (
