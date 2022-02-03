@@ -38,7 +38,7 @@ function KeyboardRow (props) {
 }
 
 export default function Keyboard (props) {
-    const letterRows = ["qwertyuiop","asdfgjkl","!zxcvbnm@"]
+    const letterRows = ["qwertyuiop","asdfghjkl","!zxcvbnm@"]
     //console.log(props)
     return (
         <div className="keyboard">
