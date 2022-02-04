@@ -13,37 +13,34 @@ export default function App() {
     const word = "fjord"
     const [styles, setStyles] = React.useState (() => ["white","white","white","white","white" ])
     const [keyStyles, setKeyStyles] = React.useState (() => initKeyStyles())
-    const [playerIndex, setPlayerIndex] = React.useState(() => 5);
+    const [playerIndex, setPlayerIndex] = React.useState(() => 0);
     const [validSubmit, setValidSubmit] = React.useState(() => false);
     const [wordle, setWordle] = React.useState(() => false);
     const [endOfGame, setEndOfGame] = React.useState(() => false);
 
     React.useEffect( () => {
-        console.log(rows)
         setRows( (prevRows) => {
             const playerRow = prevRows[playerIndex]
-            console.log(playerRow)
             playerRow.squares = playerRow.squares.map((square, index) => ({letter: [...playerRow.letters][index], color: styles[index]}))
             return prevRows.map( (row) => row.player ? playerRow : row);
         })
+
+        //submitted something 
         if (validSubmit) {
             nextRow();
             setValidSubmit(false);
-            console.log("in submit" + playerIndex)
             if(playerIndex === rows.length) {
-                console.log("in valid submit" + playerIndex)
                 setEndOfGame(true);
             }
-        }
-    }, [validSubmit])
+            setStyles(["white","white","white","white","white" ]);
+        } 
 
-    React.useEffect( () => {
-        console.log("in wordle check " + playerIndex)
+        // lost game
         if(playerIndex === rows.length - 1 && validSubmit) {
-            console.log("in last row")
             setEndOfGame(true);
         }
 
+        // won game
         if(rows[playerIndex].letters == word) {
             setWordle(true);
             setEndOfGame(true);
@@ -54,12 +51,10 @@ export default function App() {
     function initKeyStyles() {
         const letters = "qwertyuiopasdfghjkl!zxcvbnm@"
         const letterStyles = [...letters].map((char) => ({letter: char, color: 'white'}))
-        console.log("in init key styles", letterStyles)
         return letterStyles;
     }
 
     function initRows () {
-        console.log("rows initialized")
         const rows = []
         for (let i = 0; i < 6; i++) {
             rows.push({squares: initSquares(), letters: '', squareNum: 5});
@@ -112,7 +107,7 @@ export default function App() {
             
             for (let i = 0; i < [...playerRow.letters].length; i++) {
                 const letter = [...playerRow.letters][i]
-                console.log(keyStyles)
+                //("in submit", keyStyles)
                 setKeyStyles( (prevStyles) => {
                     const newStyles = prevStyles.map((style) => 
                         (letter) === style.letter ? 
@@ -131,11 +126,10 @@ export default function App() {
         setRows(initRows())
         setPlayerIndex(0);
         setEndOfGame(false);
-        setStyles(initKeyStyles());
+        setKeyStyles(initKeyStyles());
     }
 
     function inDictionary(lookup) {
-        //console.log("in dictionary")
         return dictionary.some((word) => word === lookup);
     }
 

@@ -10,7 +10,7 @@
 
 ### Changes to Die 
 - [x] Die class should be a letter input instead
-- [ ] When submitted letter style should change based on if the position or the word is in the right spot
+- [x] When submitted letter style should change based on if the position or the word is in the right spot
 - [x] Letters don't need to be clicked on
 - [x] The grid should be 6 rows long and 5 letter across
 - [x] - Each square is made from a square object {letter: a, color: white}
@@ -29,9 +29,9 @@
 - [x] The keyboard has an enter button
 - [x] The enter button submits your guess
 - [x] Words submitted must be in the english dictionary
-- [x] Words that are not in the dictionary will show up as red and cannot be submitted
+- [ ] Words that are not in the dictionary will show up as red and cannot be submitted
 - [ ] Red styling will be reset when you press any button on the keyboard
-- [ ] The style of the keyboard changes which matches the letter style, or grey if the letter was guessed but not in the word.
+- [x] The style of the keyboard changes which matches the letter style, or grey if the letter was guessed but not in the word.
 - [x] Each time a word is submitted letters that are in the correct spot are green and letters in the word are yellow
 - [ ] For words with multiple of the same letter, yellow and green letters matches the number of letters in the word.
         ex.  STALE, guessed TRAIL, 1 yellow L. guessed ALELE,  1 green L. Should not be 1 yellow 1 green L. 

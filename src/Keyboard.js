@@ -15,9 +15,6 @@ function Key (props) {
     const styles = {
         backgroundColor: props.style.color
     }
-
-    //console.log("styles check", styles)
-
     return (
         <button className="keyboard--key" style={styles} onClick={callback}>
             <h4 className = {useIcon}>
@@ -48,7 +45,6 @@ function KeyboardRow (props) {
 
 export default function Keyboard (props) {
     const letterRows = ["qwertyuiop","asdfghjkl","!zxcvbnm@"]
-    //console.log(props)
     return (
         <div className="keyboard">
             {[...letterRows].map((row) => 
