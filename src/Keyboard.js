@@ -12,8 +12,14 @@ function Key (props) {
         () => props.submit() :
         () => props.addLetter(props.char)
 
+    const styles = {
+        backgroundColor: props.style.color
+    }
+
+    //console.log("styles check", styles)
+
     return (
-        <button className="keyboard--key" onClick={callback}>
+        <button className="keyboard--key" style={styles} onClick={callback}>
             <h4 className = {useIcon}>
                 {backspace ? "arrow_back" : 
                 submit ? "check" :
@@ -24,6 +30,7 @@ function Key (props) {
 }
 
 function KeyboardRow (props) {
+
     return (
         <div className="keyboard--row">
             {[...props.letters].map((letter) => 
@@ -32,7 +39,9 @@ function KeyboardRow (props) {
             key={nanoid()} 
             addLetter={props.addLetter} 
             removeLetter={props.removeLetter} 
-            submit={props.submit} />)}
+            submit={props.submit}
+            style={props.keyStyles.filter((style) => (style.letter) == letter)[0]}
+            />)}
         </div>
     )
 }
@@ -48,7 +57,9 @@ export default function Keyboard (props) {
             key={nanoid()} 
             addLetter={props.addLetter} 
             removeLetter={props.removeLetter} 
-            submit={props.submit}/>)}
+            submit={props.submit}
+            keyStyles={props.keyStyles}
+            />)}
         </div>
     )
     }

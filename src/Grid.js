@@ -4,20 +4,19 @@ import {nanoid} from 'nanoid'
 
 function Square(props) {
     const {color} = props.square;
-    let finalColor = "";
-    if (color === "green") {
-        finalColor = "#7ef47c"
-    } else if (color ==="yellow") {
-        finalColor = "#f7f580"
-    } else if (color ==="red") {
-        finalColor = "#f78082"
-    } else if (color ==="grey") {
-        finalColor = "#cacaca"
-    } else {
-        finalColor = "white"
-    }
+    // if (color === "green") {
+    //     finalColor = "#7ef47c"
+    // } else if (color ==="yellow") {
+    //     finalColor = "#f7f580"
+    // } else if (color ==="red") {
+    //     finalColor = "#f78082"
+    // } else if (color ==="grey") {
+    //     finalColor = "#cacaca"
+    // } else {
+    //     finalColor = "white"
+    // }
     const styles = {
-        backgroundColor: finalColor
+        backgroundColor: color
     }
     //console.log(styles)
     return (

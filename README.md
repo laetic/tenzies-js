@@ -5,7 +5,7 @@
 ### Winning and Losing
 - [x] If all the letters are correct (green) the game is won
 - [x] If you win the game a screen says you won and a new game can be started. 
-- [ ] If you fill all the rows without guessing the word the game is lost
+- [x] If you fill all the rows without guessing the word the game is lost
 - [x] A new game can be started if you lose the game. 
 
 ### Changes to Die 
