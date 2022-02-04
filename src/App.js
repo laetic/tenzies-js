@@ -1,10 +1,7 @@
 import React from "react"
-import Die from './Grid'
-import {nanoid} from 'nanoid'
 import Confetti from "react-confetti"
 import Keyboard from "./Keyboard"
 import Grid from "./Grid"
-import { fireEvent } from "@testing-library/react"
 import dictionary from './dictionary'
 
 
@@ -41,7 +38,7 @@ export default function App() {
         }
 
         // won game
-        if(rows[playerIndex].letters == word) {
+        if(rows[playerIndex].letters === word) {
             setWordle(true);
             setEndOfGame(true);
         }
@@ -97,7 +94,7 @@ export default function App() {
         const playerRow = rows[playerIndex]
 
         let colors = []
-        if (playerRow.letters.length != 5 || !(inDictionary(playerRow.letters))) {
+        if (playerRow.letters.length !== 5 || !(inDictionary(playerRow.letters))) {
             colors = playerRow.squares.map(() => "#f78082") //red
             setValidSubmit(false);
         } else {
@@ -150,7 +147,7 @@ export default function App() {
                 </div>
             }
             {!wordle && 
-            <p> Guess the 5 letter word. Only english words can be guessed. Letters in the right spot are green. Letters in the word are yellow.</p>}
+            <p> Guess the 5 letter word! You know how it goes.</p>}
             <div className="grid">
                 {<Grid rows={rows}/>}
             </div>
