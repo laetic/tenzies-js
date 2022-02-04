@@ -29,7 +29,7 @@
 - [x] The keyboard has an enter button
 - [x] The enter button submits your guess
 - [x] Words submitted must be in the english dictionary
-- [ ] Words that are not in the dictionary will show up as red and cannot be submitted
+- [x] Words that are not in the dictionary will show up as red and cannot be submitted
 - [ ] Red styling will be reset when you press any button on the keyboard
 - [x] The style of the keyboard changes which matches the letter style, or grey if the letter was guessed but not in the word.
 - [x] Each time a word is submitted letters that are in the correct spot are green and letters in the word are yellow

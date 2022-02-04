@@ -46,7 +46,8 @@ export default function App() {
             setEndOfGame(true);
         }
 
-    }, [validSubmit])
+    }, [validSubmit, styles])
+    
 
     function initKeyStyles() {
         const letters = "qwertyuiopasdfghjkl!zxcvbnm@"
@@ -75,8 +76,9 @@ export default function App() {
 
         setRows( (prevRows) => {
             const playerRow = rows[playerIndex]
-            if (playerRow.letters.length < 5) {}
+            if (playerRow.letters.length < 5) {
                 playerRow.letters = playerRow.letters.concat(letter);
+            }
             return prevRows.map( (row) => row.player ? playerRow : row);
         })
     }
